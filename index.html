@@ -32,7 +32,17 @@
             <form id="addbus" method="get" action="">
                 BUS NUMBER: 
                 <input type="text" name="busNo"/>
-                <br/><br/>
+                <br/><br/><br/>
+                <div id="modroute">
+                <div id="route">
+                  <input type="radio" name="stop1" value="">
+                  <label for="stop1"></label><br>
+                  <input type="radio" name="stop1" value="">
+                  <label for="female"></label><br>
+                  <input type="radio" name="stop1" value="">
+                  <label for="other"></label>
+                </div>
+                <div id="routeinfo">
                 BUS-STOP:
                 <select>
                     <option value="Modipuram Bypass">Modipuram Bypass</option>
@@ -48,6 +58,8 @@
                 ARRIVAL TIME:
                 <input name="FAT" type="time" placeholder="enter arrival time"/><br/><br/>
             <button type="submit">ADD Stop</button>
+            </div>
+            </div>
           </form>
         </div>
         <hr size="2px">
