@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <title>RailwaysBusAdmin</title>
+    <link href="admin.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div id="header">
+         BUS ADMIN
+    </div>
+    <div id="window">
+        <div id="mySidenav" class="sidenav">
+            <br/><br/><b id= "navhead">Manage :-</b><br/><br/><br/>
+            <a href="addBus.html">Add Bus</a>
+            <a href="ModifyBus.html">Modify Stops</a>
+            <a href="DeleteBus.html" id="highlight">Delete Bus</a>
+            <a href="AssCond.html">Associate Conductor</a>
+        </div>
+
+    <div id="main">
+        <hr size="2px">
+        <hr size="2px">
+        <div id="del" class = "section">
+            <p class="heading">DELETE BUS</p>
+            <form id="delbus" method="get" action="">
+                BUS NUMBER:     <input name="busNo" type="text"/> <br /><br/>
+                <button type="submit">DELETE BUS</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+  </body>
+</html>
