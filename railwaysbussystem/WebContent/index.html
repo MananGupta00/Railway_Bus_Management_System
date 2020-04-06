@@ -2,7 +2,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>BUSADMIN</title>
+<link href="admin.css" rel="stylesheet" />
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<style>
+         table, td, th {
+            border: 1px solid black;
+            width: 300px;
+         }
+         
+      </style>
 </head>
 <body>
 
@@ -20,12 +29,19 @@
 
     <div id="main">
         <hr size="2px">
-        <hr size="2px">
+        
         <div id="showbus" class = "section">
             <p class="heading">BUSES</p>
             	
-                <button id="showbut">SHOW</button>
-            
+                <br/>
+            	<div id="bustab"></div>
+        </div>
+        <hr size="2px">
+        <div id="showstops" class = "section">
+            <p class="heading">STOPS</p>
+            	
+                <br/>
+            	<div id="stoptab"></div>
         </div>
     </div>
 	</div>
@@ -33,12 +49,19 @@
     
     
     <script>
-    $(document).on("click", "#showbut", function() {  // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
-        $.get("indexlet", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
-            var $ul = $("<ul>").appendTo($("#showbus")); // Create HTML <ul> element and append it to HTML DOM element with ID "somediv".
-            $.each(responseJson, function(index, item) { // Iterate over the JSON array.
-                $("<li>").text(item).appendTo($ul);      // Create HTML <li> element, set its text content with currently iterated item and append it to the <ul>.
-            });
+    $(document).ready( function() {  // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+        $.get("indexlet",{
+        	'id': "bus"
+        }).done(function(response) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+            
+            $("#bustab").html(response);      
+        });
+    
+        $.get("indexlet",{
+        	'id': "stop"
+        }).done(function(response) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+            
+            $("#stoptab").html(response);      
         });
     });
     </script>
