@@ -1,0 +1,46 @@
+
+<html>
+  <head>
+    <title>RailwaysBusAdmin</title>
+    <link href="admin.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  </head>
+  <body>
+    <div id="header">
+         BUS ADMIN
+    </div>
+    <div id="window">
+        <div id="mySidenav" class="sidenav">
+            <br/><br/><b id= "navhead">Manage :-</b><br/><br/><br/>
+            <a href="addBus.html">Add Bus</a>
+            <a href="modify.html">Modify Stops</a>
+            <a href="DeleteBus.html" id="highlight">Delete Bus</a>
+            <a href="AssCond.html">Associate Conductor</a>
+        </div>
+
+    <div id="main">
+        <hr size="2px">
+        <hr size="2px">
+        <div id="del" class = "section">
+            <p class="heading">DELETE BUS</p>
+            
+                BUS NUMBER:     <input id="busNoid" type="text"/> <br /><br/>
+                <button id="submit">DELETE BUS</button>
+            
+        </div>
+    </div>
+	</div>
+    <div id="footer"></div>
+    
+    
+    <script>
+    $(document).on("click", "#submit", function() { 
+        $.get("Sdelete",{'busNo': document.getElementById("busNoid").value
+        			  }).done(function(response) {   
+            alert(response);
+        });
+    });
+    </script>
+  </body>
+</html>
+

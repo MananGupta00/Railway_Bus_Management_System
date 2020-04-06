@@ -1,0 +1,44 @@
+<html>
+  <head>
+    <title>RailwaysBusAdmin</title>
+    <link href="admin.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  </head>
+  <body>
+    <div id="header">
+         BUS ADMIN
+    </div>
+    <div id="window">
+        <div id="mySidenav" class="sidenav">
+            <br/><br/><b id= "navhead">Manage :-</b><br/><br/><br/>
+            <a href="addBus.html">Add Bus</a>
+            <a href="modify.html">Modify Stops</a>
+            <a href="DeleteBus.html">Delete Bus</a>
+            <a href="AssCond.html" id="highlight">Associate Conductor</a>
+        </div>
+
+    <div id="main">
+        <hr size="2px">
+        <div id="ass" class="section">
+            <p class="heading">ASSOCIATE CONDUCTOR</p>
+            
+             BUS NUMBER:     <input id="busNoid" type="text"/> <br /><br/>
+             BUS CONDUCTOR:  <input id= "conid" type="text" /> <br /><br/>
+             <button id="submit">ADD BUS</button>
+             
+        </div>
+    </div>
+	</div>
+    <div id="footer"></div>
+    
+    <script>
+    $(document).on("click", "#submit", function() { 
+        $.get("Sass",{'busNo': document.getElementById("busNoid").value,
+        			  'con': document.getElementById("conid").value
+     	}).done(function(response) {   
+            alert(response);
+        });
+    });
+    </script>
+  </body>
+</html>
