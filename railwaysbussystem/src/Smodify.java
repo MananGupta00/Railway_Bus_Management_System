@@ -20,18 +20,18 @@ public class Smodify extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/plain");
+		response.setContentType("text/html");
 	    response.setCharacterEncoding("UTF-8");
 	    
 	    String id=request.getParameter("id");
 		try { 
 			 Connection con = DatabaseConnection.initializeDatabase();
-			 String busno=request.getParameter("busNo");
-			 String routeStop=request.getParameter("route");
-			 String stop=request.getParameter("stop");
-			 String fat=request.getParameter("FAT");
+			 
 			 
 			 if(id.equals("add")){
+				 String busno=request.getParameter("busNo");
+				 String stop=request.getParameter("stop");
+				 String fat=request.getParameter("FAT");
 				 PreparedStatement st = con.prepareStatement("insert into z"+busno+" values(?,?,?);");
 				 st.setString(1,stop);
 				 st.setString(2,fat);
@@ -44,6 +44,8 @@ public class Smodify extends HttpServlet {
 			 
 			 else if(id.equals("del")){
 				 //delete stop in database
+				 String busno=request.getParameter("busNo");
+				 String routeStop=request.getParameter("route");
 				 PreparedStatement st = con.prepareStatement("delete from z"+busno+" where stop='"+routeStop+"';");
 				 st.executeUpdate();
 				 st.close();
@@ -52,11 +54,37 @@ public class Smodify extends HttpServlet {
 			 
 			 else if(id.equals("show")){
 				 //retrieve data from database and respond to
-				 PreparedStatement st = con.prepareStatement("select * from "+busno+";");
+				 String busno=request.getParameter("busNo");
+				 PreparedStatement st = con.prepareStatement("select stop,Expected_Arrival from z"+busno+" order by Expected_Arrival;");
 				 ResultSet rs = st.executeQuery();
 				 
 				 while(rs.next()){
-					 response.getWriter().write(rs.getRow());
+					 response.getWriter().write("<option value='"+rs.getString(1)
+					 +"'>"+rs.getString(1)+"	"+rs.getString(2)+"</option>");
+				 }
+				 st.close();
+			 }
+			 else if(id.equals("showBusNo")){
+				 //retrieve data from database and respond to
+
+				 PreparedStatement st = con.prepareStatement("select busno from busadmin;");
+				 ResultSet rs = st.executeQuery();
+				 
+				 while(rs.next()){
+					 response.getWriter().write("<option value='"+rs.getString(1)
+					 +"'>"+rs.getString(1)+"</option>");
+				 }
+				 st.close();
+			 }
+			 else if(id.equals("showStop")){
+				 //retrieve data from database and respond to
+
+				 PreparedStatement st = con.prepareStatement("select * from stops;");
+				 ResultSet rs = st.executeQuery();
+				 
+				 while(rs.next()){
+					 response.getWriter().write("<option value='"+rs.getString(1)
+					 +"'>"+rs.getString(1)+"</option>");
 				 }
 				 st.close();
 			 }

@@ -3,6 +3,9 @@
     <title>RailwaysBusAdmin</title>
     <link href="admin.css" rel="stylesheet" />
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <style type="text/css">div{
+    resize: horizontal;
+    overflow: auto;}</style>
   </head>
   <body>
     <div id="header">
@@ -15,6 +18,7 @@
             <a href="#mod" id="highlight">Modify Stops</a>
             <a href="DeleteBus.html">Delete Bus</a>
             <a href="AssCond.html">Associate Conductor</a>
+            <a href="index.html">Index</a>
         </div>
 
     <div id="main">
@@ -24,10 +28,8 @@
             
               BUS NUMBER: 
             <select id="busNoid">
-                    <option value="00">00</option>
-                    <option value="2">Bus2</option>
-                    <option value="3">Bus3</option>
-                    <option value="4">Bus4</option>
+            		<option>Select Bus Number</option>
+                    
             </select>
               <br/>
               <br/>
@@ -35,30 +37,13 @@
                 <div id="modroute">
                 <div id="route">
                   <select id="routeid">
- 					<option value="Modipuram Bypass">Modipuram Bypass</option>
-                    <option value="Kanker Khera Bypass">Kanker Khera Bypass</option>
-                    <option value="Rohta Bypass">Rohta Bypass</option>
-                    <option value="Bagpat Bypass">Bagpat Bypass</option>
-                    <option value="Meerut City Railway Station">Meerut City Railway Station</option>
-                    <option value="Meerut Cantt Railway Station">Meerut Cantt Railway Station</option>
-                    <option value="Pavli Khaas Railway Station">Pavli Khaas Railway Station</option>
-                    <option value="Shastri Nagar">Shastri Nagar</option>
-                    <option value="Begum Pul">Begum Pul</option>
                   </select>
                   <button id="delbut">DELETE STOP</button>
                 </div>
                 <div id="routeinfo">
                 BUS-STOP:
                 <select id="stopid" >
-                    <option value="Modipuram Bypass">Modipuram Bypass</option>
-                    <option value="Kanker Khera Bypass">Kanker Khera Bypass</option>
-                    <option value="Rohta Bypass">Rohta Bypass</option>
-                    <option value="Bagpat Bypass">Bagpat Bypass</option>
-                    <option value="Meerut City Railway Station">Meerut City Railway Station</option>
-                    <option value="Meerut Cantt Railway Station">Meerut Cantt Railway Station</option>
-                    <option value="Pavli Khaas Railway Station">Pavli Khaas Railway Station</option>
-                    <option value="Shastri Nagar">Shastri Nagar</option>
-                    <option value="Begum Pul">Begum Pul</option>
+                    
             </select><br/><br/>
                 ARRIVAL TIME:
                 <input id="FATid" type="time"/><br/><br/>
@@ -73,6 +58,17 @@
     <div id="footer"></div>
     
     <script>
+    function show() {
+    	$.get("Smodify",
+        		{
+        		  'id': "show",
+        		  'busNo': $("#busNoid").children("option:selected").val(),
+      			  
+      			  }
+        ).done(function(response) {   
+        	$("#routeid").html(response);
+        });
+    }
     $(document).on("click", "#addbut", function() { 
         $.get("Smodify",{
         			  'id': "add",
@@ -82,12 +78,6 @@
         			  'FAT': document.getElementById("FATid").value}
         ).done(function(response) {   
             alert(response);
-            console.log({
-		 	  'id': "add",
-  			  'busNo': $("#busNoid").children("option:selected").val(),
-  			  'route': $("#routeid").children("option:selected").val(),
-  			  'stop':  $("#stopid").children("option:selected"). val(),
-  			  'FAT':  $("#FATid").val()});
         });
     });
     
@@ -97,11 +87,40 @@
         		  'id': "del",
         		  'busNo': $("#busNoid").children("option:selected").val(),
       			  'route': $("#routeid").children("option:selected").val(),
-      			  'stop':  $("#stopid").children("option:selected"). val(),
-      			  'FAT': document.getElementById("FATid").value
+      			  
+      			  }
+        ).done(function(response) { 
+        	show();
+            alert(response);
+        });
+    });
+    
+    $("#busNoid").click(function() { 
+        $.get("Smodify",
+        		{
+        		  'id': "show",
+        		  'busNo': $("#busNoid").children("option:selected").val(),
+      			  
       			  }
         ).done(function(response) {   
-            alert(response);
+        	$("#routeid").html(response);
+        });
+    });
+    
+    $(document).ready(function() { 
+        $.get("Smodify",
+        		{
+        		  'id': "showBusNo"
+      			  }
+        ).done(function(response) {   
+        	$("#busNoid").html(response);
+        });
+        $.get("Smodify",
+        		{
+        		  'id': "showStop"
+      			  }
+        ).done(function(response) {   
+        	$("#stopid").html(response);
         });
     });
     </script>

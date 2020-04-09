@@ -34,13 +34,13 @@ public class Sadd extends HttpServlet {
             if(request.getParameter("id").equals("bus"))
             {
             PreparedStatement st = con.prepareStatement("insert into busadmin values(?, ?, ?)"); 
-            st.setString(1, "z"+busno); 
+            st.setString(1, ""+busno); 
             st.setString(2, conid);
             st.setString(3, station);
             
             
-            String busstop="create table z" + busno+ 
-            		" (stop varchar(100),Arrival_time time,Expected_Arrival time);";
+            String busstop="create table " +"z"+ busno+ 
+            		" (stop varchar(100) primary key,Arrival_time time,Expected_Arrival time);";
             Statement st1= con.createStatement();
             
             st.executeUpdate();

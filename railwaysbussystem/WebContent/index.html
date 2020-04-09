@@ -43,6 +43,15 @@
                 <br/>
             	<div id="stoptab"></div>
         </div>
+        <hr size="2px">
+        <div id="showz" class = "section">
+            <p class="heading">Bus Routes</p>
+            <input id="routeSearch" type="text" placeholder="Enter bus number"/>
+            <button type="button" id="busSearch">Search Bus</button>
+                <br/>
+            	<div id="searchtab"></div>
+        </div>
+        
     </div>
 	</div>
     <div id="footer"></div>
@@ -62,6 +71,15 @@
         }).done(function(response) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
             
             $("#stoptab").html(response);      
+        });
+    });
+    
+    $(document).on("click", "#busSearch", function() { 
+        $.get("indexlet",{
+        	'id': "busSearch",
+        	'busNo': document.getElementById("routeSearch").value}
+        ).done(function(response) {   
+        	$("#searchtab").html(response); 
         });
     });
     </script>

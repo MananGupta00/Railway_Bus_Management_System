@@ -10,12 +10,12 @@ public class DatabaseConnection {
 		throws SQLException, ClassNotFoundException 
 	{ 
 		
-		String dbDriver = "com.mysql.jdbc.Driver"; 
-		String dbURL = "jdbc:mysql://localhost:3306/"; 
-		// Database name to access 
-		String dbName = "railwaybus"; 
-		String dbUsername = "root"; 
-		String dbPassword = "manan"; 
+		String dbDriver = "com.mysql.jdbc.Driver";
+		String dbURL = "jdbc:mysql://localhost:3306/";
+		// Database name to access
+		String dbName = "railwaybus";
+		String dbUsername = "root";
+		String dbPassword = "manan";
 
 		Class.forName(dbDriver); 
 		Connection con = DriverManager.getConnection(dbURL + dbName, 

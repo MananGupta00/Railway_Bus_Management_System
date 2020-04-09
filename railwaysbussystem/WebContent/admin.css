@@ -17,6 +17,7 @@ option {
   font-size: 18px;
 }
 .section {
+	width:100%;
   border: peru;
   border-width: 2px;
   border-style: solid;
@@ -25,6 +26,7 @@ option {
   margin-bottom: 50px;
   margin-top: 50px;
   padding-bottom: 50px;
+  align-items: center;
 }
 #form {
   display: flex;
@@ -99,4 +101,14 @@ option {
 #routeinfo {
   text-align: left;
   margin-left: 60px;
+}
+#info{
+	display: flex;
+	flex-direction: column;
+	justify-content: space between;
+	align-items: center;
+
+}
+button{
+	width:100px;
 }

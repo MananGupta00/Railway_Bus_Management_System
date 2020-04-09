@@ -15,6 +15,7 @@
             <a href="modify.html">Modify Stops</a>
             <a href="DeleteBus.html">Delete Bus</a>
             <a href="AssCond.html" id="highlight">Associate Conductor</a>
+            <a href="index.html">Index</a>
         </div>
 
     <div id="main">
@@ -22,9 +23,9 @@
         <div id="ass" class="section">
             <p class="heading">ASSOCIATE CONDUCTOR</p>
             
-             BUS NUMBER:     <input id="busNoid" type="text"/> <br /><br/>
+             BUS NUMBER:     <select id="busNoid" ></select> <br /><br/>
              BUS CONDUCTOR:  <input id= "conid" type="text" /> <br /><br/>
-             <button id="submit">ADD BUS</button>
+             <button id="submit">ADD CONDUCTOR</button>
              
         </div>
     </div>
@@ -37,6 +38,16 @@
         			  'con': document.getElementById("conid").value
      	}).done(function(response) {   
             alert(response);
+        });
+    });
+    
+    $(document).ready(function() { 
+        $.get("Smodify",
+        		{
+        		  'id': "showBusNo"
+      			  }
+        ).done(function(response) {   
+        	$("#busNoid").html(response);
         });
     });
     </script>

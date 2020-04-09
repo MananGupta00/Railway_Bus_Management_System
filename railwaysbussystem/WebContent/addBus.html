@@ -16,6 +16,7 @@
             <a href="modify.html">Modify Stops</a>
             <a href="DeleteBus.html">Delete Bus</a>
             <a href="AssCond.html">Associate Conductor</a>
+            <a href="index.html">Index</a>
         </div>
     <div id="main">
         <hr size="2px">
@@ -29,10 +30,12 @@
         
         <div id="add" class="section">
             <p class="heading">ADD BUSES</p>
-            BUS NUMBER:     <input id="busNoid" name="busNo" type="text"/> <br /><br/>
-            BUS CONDUCTOR:  <input id="conid" name="con" type="text" /> <br /><br/>
-            STATION:  		<input id="statid" name="stat" type="text" /> <br /><br/>
-            <button id="submit" type="submit">ADD BUS</button>
+            <div id="info">
+            <div>BUS NUMBER:     <input id="busNoid" name="busNo" type="text"/> </div><br />
+            <div>BUS CONDUCTOR:  <input id="conid" name="con" type="text" /> </div><br />
+            <div>STATION:  		<select id="statid" ></select></div><br />
+            <button id="submit"  type="submit">ADD BUS</button>
+            </div>
         </div>
         <hr size="2px"> 
         
@@ -61,6 +64,14 @@
             'stat': document.getElementById("statid").value}
         ).done(function(response) {   
             alert(response);
+        });
+    });
+    $(document).ready(function() { 
+        $.get("Smodify",
+        		{
+        		  'id': "showStop"
+      			  }).done(function(response) {   
+        	$("#statid").html(response);
         });
     });
     </script>

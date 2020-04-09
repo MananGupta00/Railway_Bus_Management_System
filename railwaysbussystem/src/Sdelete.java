@@ -2,7 +2,6 @@
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.Statement;
 
 import javax.servlet.ServletException;
@@ -16,9 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/Sdelete")
 public class Sdelete extends HttpServlet {
-	
-
   
+	private static final long serialVersionUID = 1L;
+
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/plain");
 	    response.setCharacterEncoding("UTF-8");
@@ -28,7 +28,7 @@ public class Sdelete extends HttpServlet {
            
             Connection con = DatabaseConnection.initializeDatabase(); 
             String drop="drop table z"+busno+";";
-            String delete="delete from busadmin where busno = 'z"+busno+"' ;";
+            String delete="delete from busadmin where busno = '"+busno+"' ;";
             Statement st= con.createStatement();
             //Statement st1= con.createStatement();
             
