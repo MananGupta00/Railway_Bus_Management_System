@@ -21,8 +21,8 @@ option {
   border: peru;
   border-width: 2px;
   border-style: solid;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 10%;
+  
   margin-bottom: 50px;
   margin-top: 50px;
   padding-bottom: 50px;
@@ -34,7 +34,7 @@ option {
   flex-wrap: wrap;
 }
 #main {
-  margin-left: 25%;
+  margin-left: 20%;
   text-align: center;
 }
 .heading {
