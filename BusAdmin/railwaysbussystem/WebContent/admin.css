@@ -1,0 +1,114 @@
+#navhead {
+  font-size: 30px;
+  color: beige;
+  margin-left: 25px;
+}
+select {
+  padding-bottom: 10px;
+  font-size: 18px;
+}
+form {
+  background-color: wheat;
+  padding-top: 60px;
+  padding-bottom: 60px;
+}
+option {
+  padding-bottom: 10px;
+  font-size: 18px;
+}
+.section {
+	width:100%;
+  border: peru;
+  border-width: 2px;
+  border-style: solid;
+  margin-left: 10%;
+  
+  margin-bottom: 50px;
+  margin-top: 50px;
+  padding-bottom: 50px;
+  align-items: center;
+}
+#form {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+#main {
+  margin-left: 20%;
+  text-align: center;
+}
+.heading {
+  padding-top: 10px;
+  font-size: 30px;
+  background-color: thistle;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  text-decoration-line: underline;
+}
+#header {
+  margin-left: 25%;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  font-size: 48px;
+  font-family: "Lucida Sans";
+  text-align: center;
+  background-color: #bbbbbb;
+}
+
+.sidenav {
+  height: 100%;
+  width: 25%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(39, 0, 0);
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+}
+
+.sidenav a {
+  padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+#highlight {
+  color: blanchedalmond;
+  background-color: rgb(20, 0, 0);
+}
+
+.sidenav a:hover {
+  color: #f1f1f1;
+}
+#modroute {
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+}
+#route {
+
+  text-align: left;
+  padding-right: 100px;
+  border-right: dashed darkslategrey 2px;
+}
+#routeinfo {
+  text-align: left;
+  margin-left: 60px;
+}
+#info{
+	display: flex;
+	flex-direction: column;
+	justify-content: space between;
+	align-items: center;
+
+}
+button{
+	width:100px;
+}
