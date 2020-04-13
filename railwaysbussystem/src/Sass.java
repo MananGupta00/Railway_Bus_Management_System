@@ -52,7 +52,7 @@ public class Sass extends HttpServlet {
             response.getWriter().write("conductor changed");
              }
              else if(id.equals("print")){
-            	 response.getWriter().write("<hr size='2px'> <div id='ass' class='section'> <p class='heading'>ASSOCIATE CONDUCTOR</p> BUS NUMBER: <select id='busNoid' ></select> <br /><br/>BUS CONDUCTOR:<input id= 'conid' type='text' /> <br /><br/><button id='submit'>ADD CONDUCTOR</button> </div><script> $(document).on('click', '#submit', function() {  $.get('Sass',{ 'id': 'assign', 'busNo': document.getElementById('busNoid').value, 			'con': document.getElementById('conid').value  	}).done(function(response) {  alert(response); }); }); $(document).ready(function() {  $.get('Smodify', 		{ 		'id': 'showBusNo' 			} ).done(function(response) {  	$('#busNoid').html(response); }); }); </script>");
+            	 response.getWriter().write("<hr size='2px'> <div id='ass' class='section'> <p class='heading'>ASSOCIATE CONDUCTOR</p> BUS NUMBER: <select id='busNoid' ></select> <br /><br/>BUS CONDUCTOR:<input id= 'conid' type='text' /> <br /><br/><button id='submitass'>ADD CONDUCTOR</button> </div><script> $('#submitass').click( function() {  $.get('Sass',{ 'id': 'assign', 'busNo': document.getElementById('busNoid').value, 			'con': document.getElementById('conid').value  	}).done(function(response) {  alert(response); }); }); $(document).ready(function() {  $.get('Smodify', 		{ 		'id': 'showBusNo' 			} ).done(function(response) {  	$('#busNoid').html(response); }); }); </script>");
              }
             break;
              }}

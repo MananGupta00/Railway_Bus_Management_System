@@ -61,7 +61,7 @@ public class Sdelete extends HttpServlet {
             break;
 			}
 			else if(id.equals("print")){
-           	 response.getWriter().write("<hr size='2px'> <div id='del' class = 'section'> <p class='heading'>DELETE BUS</p> BUS NUMBER: <input id='busNoid' type='text'/> <br /><br/> <button id='submitdel'>DELETE BUS</button> </div> <hr size='2px'><script> $(document).on('click', '#submitdel', function() {$.get('Sdelete',{ 'id':'deleteBus', 'busNo': document.getElementById('busNoid').value 			}).done(function(response) {alert(response); }); }); </script>");
+           	 response.getWriter().write("<hr size='2px'> <div id='del' class = 'section'> <p class='heading'>DELETE BUS</p> BUS NUMBER: <input id='busNoid' type='text'/> <br /><br/> <button id='submitdel'>DELETE BUS</button> </div> <hr size='2px'><script> $('#submitdel').click( function() {$.get('Sdelete',{ 'id':'deleteBus', 'busNo': document.getElementById('busNoid').value 			}).done(function(response) {alert(response); }); }); </script>");
 			}
 			break;
             }
