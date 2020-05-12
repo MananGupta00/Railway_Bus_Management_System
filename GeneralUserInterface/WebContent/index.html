@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+	<title>Railways Bus System</title>
+	<link href="UI.css" rel="stylesheet" />
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+	<div id="header">
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Maps</a></li>
+        <li><a href="#">Routes</a></li>
+        <li style="float:right"><a href="#about">Contact Us</a></li>
+    </ul>
+    </div>
+    
+    <div id="main">
+    	<div id="workspace">
+    		<div id="pnr" class="box">
+    		Enter PNR No.- 
+    		<input id="pnrno" type="number"/><br/><br/>
+    		Select Your Stop- 
+    		<select id="stop"></select>    
+    		Select Your Station-
+    		<select id="stat"></select><br/><br/>
+    		Enter Your Arrival Time at Station
+    		<input id="time" type="time"/><br/><br/>
+    		<button id="search">Search</button>
+    		</div>
+    		
+    		<div class="box"><table id="buses"></table></div>
+    	</div>
+    </div>
+    
+    <div class="footer">
+        <p>@ Indian Transport Co-orperation,Meerut</p>
+        <p>Designed by:####</p>
+    </div>
+    
+    <script>
+    		$(document).ready(function(){
+    			$.get("GenUI", {"id":"showStops"}).done(function(response){
+    				$("#stop").html(response);
+    			});
+    			$.get("GenUI", {"id":"showStat"}).done(function(response){
+    				$("#stat").html(response);
+    			});
+    		});
+    		$("#search").click(function(){
+    			$.get("GenUI", {"id":"showBus",
+    				"pnr": document.getElementById("pnrno").value,
+    				"time": document.getElementById("time").value,
+    				"stop": document.getElementById("stop").value,
+    				"stat": document.getElementById("stat").value
+    				}).done(function(response){
+    				$("#buses").html(response);
+    			});
+    		});
+    </script>
+</body>
+</html>
