@@ -57,7 +57,7 @@ public class GenUI extends HttpServlet {
 			String time=request.getParameter("time");
 			String station=request.getParameter("stat");
 			
-			String availableBuses[]= new String[100];
+			String availableBuses[][]= new String[100][3];
 			int n=0;
 			
 			
@@ -80,22 +80,55 @@ public class GenUI extends HttpServlet {
 					int exmin= Integer.parseInt(rss.getString(1).substring(3, 5));
 					int hr= Integer.parseInt(time.substring(0, 2));
 					int min= Integer.parseInt(time.substring(3, 5));
-					if(((hr>exhr)&&(hr<exhr+2))||((hr==exhr)&&(min>exmin)))
+					
+					if(hr<2 && exhr>2)
+						hr= hr+24;
+					
+					int net=(hr-exhr)*60+(min-exmin);
+
+					if((net>0)&&(net<120))
 					{
-						String queryStopmatch="Select stop from z"+thisBus+" where stop=?;";
+						String queryStopmatch="Select stop,Expected_Arrival from z"+thisBus+" where stop=?;";
 						PreparedStatement sts= con.prepareStatement(queryStopmatch);
 						sts.setString(1,stop);
 						ResultSet rsss=sts.executeQuery();
 						
 						if(rsss.next())
-							{availableBuses[n++]=thisBus;
-							System.out.println(thisBus);}
+							{
+							availableBuses[n][0]=thisBus;
+							availableBuses[n][1]= net+"";
+							availableBuses[n++][2]= rsss.getString(2);
+							}
 					}					
 				}
 			}
 				if(n>0){
-					while(n>0)
-						out.write("<tr><td>Your Bus= "+availableBuses[--n]+"</td></tr>");
+					int i=n-1;
+					while(i>0){
+						for(int j=0;j<i;j++)
+						{	int a=Integer.parseInt(availableBuses[j][1]);
+							int b=Integer.parseInt(availableBuses[j+1][1]);
+							if(a<b)
+							{availableBuses[j][1]=b+"";
+							availableBuses[j+1][1]=a+"";
+							
+							String s=availableBuses[j][0];
+							availableBuses[j][0]=availableBuses[j+1][0];
+							availableBuses[j+1][0]=s;
+							
+							String s2=availableBuses[j][2];
+							availableBuses[j][2]=availableBuses[j+1][2];
+							availableBuses[j+1][2]=s2;
+							}
+						}
+						i--;
+					}
+				//System.out.println(availableBuses);
+					
+					out.write("<tr><td>Your Bus</td><td> Time Left</td><td> Time At Your Stop</td></tr>");
+				while(n>0){
+					out.write("<tr><td> "+availableBuses[--n][0]+"</td><td>"+availableBuses[n][1]+" mins</td><td>"+availableBuses[n][2]+"</td></tr>");
+				}
 				}
 				else
 					out.write("NO BUS FOUND");

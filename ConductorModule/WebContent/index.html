@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
+    <title>Bus_Conductor</title>
+    <link rel="stylesheet" href="conductor.css" />
+    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+</head>
+<body>
+    <ul>
+        <li><a class="active" href="#home">Home</a></li>
+        <li><a href="#events">Maps</a></li>
+        <li><a href="#contact">Routes</a></li>
+        <li style="float:right"><a href="#about">Contact Us</a></li>
+    </ul>
+    <h1  id="Head"><b>Conductor Portal</b></h1>
+    <div id="hehe">
+    <script>
+    $(document).ready( function(){
+    	$.get("c_servlet",
+    			{'id': 'print'}
+    	).done(function(response) {   
+    	        	$("#hehe").html(response);
+    	        });
+    });
+    	
+    $(document).on("click","#submitlog", function() { 
+        $.get("login",
+        		{
+        		  'id': "print",
+        		  'name':document.getElementById("u_name").value,
+        		  'password':document.getElementById("pass").value,
+      			  }
+        ).done(function(response) {   
+        	$("#hehe").html(response);
+        });
+    });
+    </script>    
+     </div>
+    <div class="footer">
+        <p>@ Meerut Institute of Engineering and Technology ,Meerut</p>
+        <p>Designed by:Hardik Shah</p>
+    </div>
+
+    
+</body>
+</html>
