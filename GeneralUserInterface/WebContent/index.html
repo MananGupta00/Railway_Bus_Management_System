@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+	<link rel="icon" href="favicon.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Railway Bus System</title>
@@ -36,12 +38,6 @@
                 <div class="right flex-1">
                 
                     <h1>Railway Bus<br/><span>Services</span></h1>
-                    <!-- <p>
-                        Don't be petrified.....only excruciating things rewards you...N makes you flawless....
-                        Be the face of your own problems....if you achieve that level, Everyone wants your name.....
-                    </p>
-                    <a href="#" search>
-                    <button class="btn btn-secondary" onsubmit="">DOWNLOAD CV</button> -->
                     <div class="topnav">
                         <h5>Search Bus :</h5>
                         <input type="text" placeholder="Search...">
@@ -60,13 +56,25 @@
                             <input id="time" type="time"/><br/><br/>
                             <button class="btn btn-secondary" id="search">Search</button>
                             </div>
+                             
+                             
                             
-                            <div class="box"><table id="buses"></table></div>
                         </div>
                     </div>
+                  	
                 </div>
+                
             </div>
+            <!-- bus output -->
+                <div class="box">                
+                	<h3>Suggested Buses</h3>
+   					<div id="myProgress">		 
+     					<div id="bus0"></div>
+    				</div>
+    			</div>
         </div>
+         
+        
     </header>
     <div id="foot" class="footer flex">
         <p>© Meerut Institute of Engineering and Technology, Meerut<br/>
@@ -95,9 +103,86 @@
     				"stop": document.getElementById("stop").value,
     				"stat": document.getElementById("stat").value
     				}).done(function(response){
-    				$("#buses").html(response);
-    			});
+    					
+    				printBus(response);
+    				});
     		});
+    		function printBus(response){
+    			var buses= JSON.parse(response);
+    		      function printprog() {
+    		          var busCount = 0;
+
+    		          buses.map((bus) => {
+    		            busCount++;
+
+    		            var busDiv = document.createElement("div");
+    		            busDiv.setAttribute("id", "bus" + busCount);
+
+    		            document.getElementById("bus" + (busCount - 1)).append(busDiv);
+
+    		            var childDiv = document.createElement("div");
+    		            childDiv.setAttribute("id", "bus" + busCount + "stop0");
+
+    		            var bnlab = document.createElement("label");
+    		            bnlab.innerHTML = "<b> BUS NUMBER-  " + bus.busName + "</b>";
+
+    		            childDiv.append(document.createElement("br"));
+    		            childDiv.appendChild(bnlab);
+    		            childDiv.append(document.createElement("br"));
+
+    		            busDiv.appendChild(childDiv);
+
+    		            displayInfo();
+    		            function displayInfo() {
+    		              var count = 0;
+    		              var breaks = bus.stops.length;
+    		              var width = 1000 / breaks;
+
+    		              initStop();
+
+    		              function initStop() {
+    		                var outline = document.getElementById("myProgress");
+
+    		                bus.stops.map((stop) => {
+    		                  count++;
+
+    		                  var cont = document.createElement("div");
+    		                  cont.style.display = "flex";
+    		                  cont.style.flexDirection = "row";
+    		                  cont.setAttribute("id", "bus" + busCount + "stop" + count);
+    		                  var lab = document.createElement("label");
+
+    		                  lab.innerHTML = stop.name + "   " + stop.time;
+
+    		                  var strip = document.createElement("div");
+    		                  strip.style.height = 5 + "px";
+    		                  strip.style.width = 50 + "px";
+    		                  strip.style.marginTop = 6 + "px";
+    		                  if (count < breaks)
+    		                    if (bus.stops[count].status === 1)
+    		                      strip.style.backgroundColor = "#228B22";
+    		                    else strip.style.backgroundColor = "#aaa";
+
+    		                  cont.appendChild(lab);
+    		                  cont.appendChild(strip);
+    		                  document
+    		                    .getElementById("bus" + busCount + "stop" + (count - 1))
+    		                    .append(cont);
+    		                });
+    		              }
+    		            }
+    		          });
+    		        }
+
+    		        var bigDiv = document.getElementById("myProgress");
+    		        if (document.getElementById("bus1") != null) {
+    		          var newBus0 = document.createElement("div");
+
+    		          document.getElementById("bus0").replaceWith(newBus0);
+    		          newBus0.setAttribute("id", "bus0");
+    		        }
+    		        printprog();	
+    		}
     </script>
 </body>
 </html>

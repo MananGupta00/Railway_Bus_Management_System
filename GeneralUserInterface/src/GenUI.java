@@ -123,15 +123,54 @@ public class GenUI extends HttpServlet {
 						}
 						i--;
 					}
-				//System.out.println(availableBuses);
-					
-					out.write("<tr><td>Your Bus</td><td> Time Left</td><td> Time At Your Stop</td></tr>");
+
+				    //response.setContentType("application/json");
+				   // response.setCharacterEncoding("UTF-8");	
+			    PrintWriter pout= response.getWriter();
+			   
+			    
+					pout.append("[");
 				while(n>0){
-					out.write("<tr><td> "+availableBuses[--n][0]+"</td><td>"+availableBuses[n][1]+" mins</td><td>"+availableBuses[n][2]+"</td></tr>");
+					char a='"';
+					
+					pout.append("{ "+a+"busName"+a+":"+a+availableBuses[--n][0]+a+","+a+"net"+a+":"+a+availableBuses[n][1]+a+", "+a+"stops"+a+":[");
+					String queryInfo="Select stop,Expected_Arrival from z"+availableBuses[n][0]+";";
+					Statement getInfo= con.createStatement();
+					ResultSet Info= getInfo.executeQuery(queryInfo);
+					int f=0;
+					while(Info.next()){
+						if(f==1)
+							pout.append(",");
+						f=1;
+						
+						pout.append("{"+a+"name"+a+":"+a+Info.getString(1)+a);
+						pout.append(","+a+"time"+a+": "+a+Info.getString(2)+a+","+a+"status"+a+":");
+						
+						int nhr=java.time.LocalTime.now().getHour();
+						int nmin=java.time.LocalTime.now().getMinute();
+						int hr=Integer.parseInt(Info.getString(2).substring(0, 2));
+						int min=Integer.parseInt(Info.getString(2).substring(3, 5));
+						
+						
+						if(nhr>20 && hr<6)
+							hr=hr+24;
+						
+						if((nhr>hr)
+								||(nhr==hr)
+								&& nmin>min)
+							pout.append("1");
+						else
+							pout.append("0");
+						pout.append("}");
+					}
+					pout.append("]}");
+					if(n!=0)
+						pout.append(",");
 				}
+				pout.append("]");
 				}
 				else
-					out.write("NO BUS FOUND");
+					out.append("NO BUS FOUND");
 		}
 		}catch(Exception e){e.printStackTrace();}
 	}

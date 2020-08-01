@@ -24,9 +24,11 @@ body{
 header{
     background: var(--dark);
     clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 87%, 0 100%);
+    padding-bottom: 500px;
 }
 
 .container{
+	height:auto;
     max-width: 1152px;
     padding:0 15px;
     margin: auto;
@@ -143,7 +145,7 @@ header nav .branding{
   @media screen and (max-width: 600px) {
     .topnav a, .topnav input[type=text] {
       float: none;
-      display: block;
+      //display: block;
       text-align: left;
       width: 100%;
       margin: 0;
@@ -215,4 +217,7 @@ section.about p{
     width: 100%;
     height: 100%;
     padding: 0.5rem;
+}
+.box {
+	color: var(--primary);
 }
